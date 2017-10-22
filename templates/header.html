@@ -1,0 +1,39 @@
+<div class="row top-menu">
+	<div class="col-md-6  padding-top">
+        <a class="header yellow" href="{{url_for('showItems')}}">
+            <span class="glyphicon glyphicon-home " aria-hidden="true"></span>Show Catalog
+        </a>
+	</div>
+	<div class="col-md-6 text-right padding-top">
+        {%if 'username' not in session %}
+        <a class="header orange" href="{{url_for('login.showLogin', _external=True)}}">
+            Login
+		</a>
+        {% else %}
+        <p class="header orange"> {{session['username']}} </p>
+        <a class="header orange" href="{{url_for('login.disconnect', _external=True)}}">Logout </a>
+        {% endif %}
+	</div>
+    <div class="row banner main">
+        <div class=" padding-none text-center">
+           <a href="{{url_for('showItems')}}"> <h1>Catalog APP</h1> </a>
+        </div>
+    </div>
+    <div class="row divider blue">
+        <div class="col-md-12"></div>
+    </div>
+</div>
+<div class = 'flash'>
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    
+    <ul>
+        {% for message in messages %}
+        <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+</div>

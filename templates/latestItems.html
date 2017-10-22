@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+
+{%if 'username' in session %}
+<div class="row padding-top padding-bottom">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 padding-none">
+        <a href="{{url_for('newItem')}}">
+            <button class="btn btn-default" id="new-item">
+                <span class="glyphicon glyphicons-new-window-alt" aria-hidden="true"></span>Add Item
+            </button>
+        </a>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+{% endif %}
+<div class="row top-menu">
+    <div class=" col-md-4">
+        <h1>Categories</h1>
+        {% for category in categories %}
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <a href="{{url_for('showByCategory', category_id = category.id )}}">
+                    <h3 class="category-list text-capitalize">{{category.name}}</h3>
+                </a>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="vdivide col-md-8">
+        <h1>Latest Items</h1>
+        {% for item in items %}
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 ">
+                <a href="{{url_for('showItemDetails', item_id = item.id )}}">
+                    <h3 class="item-list text-capitalize padding-none">{{item.name}} <small>{{item.price}}$</small></h3>
+                </a>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
